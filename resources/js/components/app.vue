@@ -2,8 +2,8 @@
     <div>
 
     <nav-bar/>
-    <home/>
-    <create-list/>
+    <router-view/>
+    
     </div>
 </template>
 <script>

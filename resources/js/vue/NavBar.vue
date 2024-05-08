@@ -1,10 +1,10 @@
 <template>
     <div>
-        <nav class="">
+        <nav class="flex justify-between items-center">
             <div>
                 <ul class=" text-lg text-blue-500 font-bold ml-3 mt-4 flex item-center gap-4 cursor-pointer">
-                    <li class="">Home</li>
-                    <li>Create List</li>
+                    <router-link :to="{name:'Home'}" name="Home">Home</router-link>
+                    <router-link :to="{name:'CreateList'}" name="CreateList">CreateList</router-link>
                 </ul>
             </div>
             <div>
@@ -14,6 +14,7 @@
     </div>
 </template>
 <script>
+    import {useRouter} from 'vue-router'
 export default {
     
 }
