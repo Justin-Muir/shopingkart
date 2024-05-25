@@ -16,43 +16,52 @@
                         <button class="bg-green-500 text-white p-3 m-3 rounded-lg font-bold hover:text-blue-700 hover:bg-white duration-500 shadow-lg">SAVE</button>
                     </div>
                 </form>
+                {{getData.list}}
             </div>
         </section>
+        <show-list/>
     </div>
 </template>
 <script>
+import {ref} from 'vue'
 import axios from 'axios'
 import ShowList from './ShowList.vue'
+import {getDataStore} from '../store/store'
 export default {
     components: { ShowList },
     name: "CreateList",
-    data: function() {
-        return {
-            list: {
-                listfor: '',
-                listdate: ''
-            }
-        }
-    },
-    methods: {
-        createList() {
-            if (this.list.listfor == "") {
+    setup(){
+        const getData = getDataStore()
+        const list = ref({
+            listfor: '',
+            listdate: '' 
+        })
+
+       function createList() {
+            if (listfor.value == "") {
                 return
             }
-            console.log(this.list.listfor)
             axios.post('api/list/store', {
-                list: this.list,
+               list:list.value
+
             })
             .then(response => {
                 if(response.status == 201) {
-                    this.list.listfor = "",
-                    this.list.listdate = ""
+                    listfor.value = "",
+                    listdate.value = ""
                 }
             })
             .catch(error => {
                 console.log(error)
             })
         }
-    } 
+        return{
+            getData,
+            listfor: list.value.listfor,
+            listdate: list.value.listdate,
+            createList,
+            list
+        }
+    },
 }
 </script>

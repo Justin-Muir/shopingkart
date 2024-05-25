@@ -1,6 +1,7 @@
 import {createWebHistory, createRouter} from "vue-router"
 import CreateList from "../vue/CreateList.vue"
 import SignIn from "../vue/SignIn.vue"
+import ListItem from '../vue/ListItem.vue'
 const routes = [
 
     {
@@ -13,6 +14,12 @@ const routes = [
         path: '/signin',
         name: 'SignIn',
         component: SignIn,
+    },
+
+    {
+        path: '/listitem/:id',
+        name: 'ListItem',
+        component: ListItem
     }
 ]
 
