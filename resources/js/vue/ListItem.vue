@@ -1,29 +1,30 @@
 <template>
     <div>
         <section class="ml-6 mr-6 grid justify-center border-t-4 border-b-4 md:border-none border-blue-300 rounded-lg" >
-            <form action="" class="md:flex gap-4">
+            
+            <form @submit.prevent="addItems" action="" class="md:flex gap-4">
                 <div class="flex-col">
                     <div class="grid mt-4">
                         <label for="item_name">Item Name</label>
-                        <input class="border-2 border-blue-300 bg-gray-100 rounded-lg w-80 p-2 shadow-lg shadow-green-300/50" id="Item_name" type="text">
+                        <input class="border-2 border-blue-300 bg-gray-100 rounded-lg w-80 p-2 shadow-lg shadow-green-300/50" v-model="item.item_name" id="Item_name" type="text">
                     </div>
                 </div>
                 <div class="flex-col">
                     <div class="grid mt-4">
                         <label for="">price</label>
-                        <input class="border-2 border-blue-300 bg-gray-100 rounded-lg w-80 p-2 shadow-lg shadow-green-300/50" id="price" type="decimal">
+                        <input class="border-2 border-blue-300 bg-gray-100 rounded-lg w-80 p-2 shadow-lg shadow-green-300/50" v-model="item.price" id="price" type="decimal">
                     </div>
                 </div>
                 <div class="flex-col">
                     <div class="grid mt-4">
                         <label for="Quantity">Quantity</label>
-                        <input class="border-2 border-blue-300 bg-gray-100 rounded-lg w-80 p-2 shadow-lg shadow-green-300/50" id="Quantity" type="integer">
+                        <input class="border-2 border-blue-300 bg-gray-100 rounded-lg w-80 p-2 shadow-lg shadow-green-300/50" v-model="item.quantity" id="Quantity" type="integer">
                     </div>
                 </div>
                 <div class="flex-col">
                     <div class="grid mt-4 mb-4">
                         <label for="list for">Plus GCT</label>
-                        <input class="border-2 border-blue-300 bg-gray-100 rounded-lg  p-2" id="plus_gct" type="checkbox">
+                        <input class="border-2 border-blue-300 bg-gray-100 rounded-lg  p-2" v-model="item.plus_gct" id="plus_gct" type="checkbox">
                     </div>
                 </div>
                 <div class="flex justify-center">
@@ -31,43 +32,52 @@
                 </div>
             </form>
         </section>
-
-        <section>
-            
-        </section>
     </div>
 </template>
 
 <script>
 import { getDataStore } from '../store/store'
+import {useRoute} from 'vue-router'
+import {ref} from 'vue'
+import axios from 'axios'
 export default {
-    name: 'listItem',
-    data: function() {
-        return {
-            item: {
-                item_name: '',
-                price: '',
-                quantity: '',
-                plus_gct: ''
-            }
-        }
-    },
+    name:'ListItem',
     setup(){
+        const route = useRoute()
+        const list_for = route.params.id
         const getData = getDataStore()
+        const item = ref({
+            item_name: '',
+            price: '',
+            quantity: '',
+            plus_gct: '',
+            list_for: list_for
+        })
 
-        return{
-            getData
-        }
-    },
-    methods: {
-        addItems() {
-            if (this.item.item_name == "") {
+        const addItems = () => {
+            if (item.item_name == "") {
                 return
             }
-            axios.post('api/items/store/{list.itemfor}')
+            axios.post(`/api/items/store/${list_for}`, {
+                item:item.value,
+            })
+
+            .then(response => {
+                if(response.status == 201) {
+                    item.value = ''
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        }
+
+        return{
+            getData,
+            list_for,
+            item,
+            addItems,
         }
     }
-
-
 }
 </script>

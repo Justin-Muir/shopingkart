@@ -64,7 +64,7 @@ class ShopinglistController extends Controller
             $existingList->listfor = $request->list["listfor"];
             $existingList->updated_at = $request->list['listdate'] ? Carbon::now() : null;
             $existingList->save();
-
+            
             return $existingList;
         }
         return "Your shoping list not found.";

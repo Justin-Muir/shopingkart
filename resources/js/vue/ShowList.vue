@@ -6,7 +6,6 @@
             </router-link>
     </div>
 </template>
-
 <script>
     import axios from "axios"
     import {ref, onMounted,onBeforeMount} from 'vue'

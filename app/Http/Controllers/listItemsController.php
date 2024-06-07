@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\listItems;
+use Illuminate\Support\Carbon;
 use App\Models\shopingList;
 class listItemsController extends Controller
 {
@@ -28,19 +29,16 @@ class listItemsController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $list_for = ListItems::find($id);
-        $listItem = new ListItems;
+        $list_for = $id;
+        $listItem = new listItems;
+        $listItem->list_for = $list_for;
+        $listItem->price = $request->item['price'];
+        $listItem->quantity = $request->item['quantity'];
+        $listItem->item_name = $request->item['item_name'];
+        $listItem->plus_gct = $request->item['plus_gct'];
+        $listItem->save();
 
-        $listItem->listfor = $list_for;
-        $listItem->price = $request['price'];
-        $listItem->quantity = $request['quantity'];
-        $listItem->item_name = $request['list_date'];
-        $listItem->plus_get= $request['plus_gct'];
-        $listItem->list_date= $request['list_date'];
-
-
-
-
+        return $listItem;
     }
 
     /**

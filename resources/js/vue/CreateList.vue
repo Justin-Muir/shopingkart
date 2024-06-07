@@ -43,7 +43,6 @@ export default {
             }
             axios.post('api/list/store', {
                list:list.value
-
             })
             .then(response => {
                 if(response.status == 201) {

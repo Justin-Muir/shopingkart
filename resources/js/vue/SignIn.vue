@@ -21,27 +21,24 @@
 </template>
 <script>
 import axios from 'axios'
-import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 export default {
     Name: 'SignIn',
-    data() {
-        const router = useRouter()
-        return {
-            user:{
-                email: '',
-                password: ''
-            }
-        }
-    },
-
-    methods:{
-        handleSignin() {
+    setup() {
+        const router = useRoute()
+        
+        const handleSignin = () => {
+            console.log('working')
             axios.post('/login',{
                 user: this.user,
             })
             router.push('/')
         }
+        return{
+            handleSignin,
+            router
+        }
+    }
 
-    } 
 }
 </script>
