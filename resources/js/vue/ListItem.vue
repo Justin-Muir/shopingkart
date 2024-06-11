@@ -1,5 +1,10 @@
 <template>
     <div>
+        <div class="  flex justify-center mb-4  ">
+           <h1 class="max-w-1/2 shadow-lg text-5xl italic font-bold font-serif tracking-wider text-blue-700 shadow-green-300/50 h-16 rounded-lg ">
+            {{ list_for }}
+           </h1> 
+        </div>
         <section class="ml-6 mr-6 grid justify-center border-t-4 border-b-4 md:border-none border-blue-300 rounded-lg" >
             
             <form @submit.prevent="addItems" action="" class="md:flex gap-4">
@@ -31,6 +36,7 @@
                     <button class="bg-green-500 text-white p-3 m-3 rounded-lg font-bold hover:text-blue-700 hover:bg-white duration-500 shadow-lg">ADD ITEM</button>
                 </div>
             </form>
+        <show-item/>
         </section>
     </div>
 </template>
@@ -40,7 +46,9 @@ import { getDataStore } from '../store/store'
 import {useRoute} from 'vue-router'
 import {ref} from 'vue'
 import axios from 'axios'
+import ShowItem from './ShowItem.vue';
 export default {
+    components: {ShowItem},
     name:'ListItem',
     setup(){
         const route = useRoute()

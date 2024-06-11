@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\listItems;
-use Illuminate\Support\Carbon;
-use App\Models\shopingList;
 class listItemsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index()
     {
-        return listItems::orderBy('created_at', 'DESC')->get($id);
+        return listItems::orderBy('created_at', 'DESC')->get();
     }
 
     /**
