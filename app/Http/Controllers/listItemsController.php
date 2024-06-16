@@ -34,6 +34,9 @@ class listItemsController extends Controller
         $listItem->quantity = $request->item['quantity'];
         $listItem->item_name = $request->item['item_name'];
         $listItem->plus_gct = $request->item['plus_gct'];
+        $listItem->itemSubTotal = $request->item['itemSubTotal'];
+        $listItem->itemTotal = $request->item['itemTotal'];
+        $listItem->itemGCT = $request->item['itemGCT'];
         $listItem->save();
 
         return $listItem;
@@ -60,7 +63,7 @@ class listItemsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**
@@ -68,6 +71,12 @@ class listItemsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $existingItem = listItems::find($id);
+
+        if ($existingItem) {
+            $existingItem->delete();
+            return "List succesfully deleted";
+        }
+        return "list not found";
     }
 }

@@ -60,7 +60,7 @@ class ShopinglistController extends Controller
         $existingList = ShopingList::find($id);
 
         if ( $existingList) {
-            $existingList->listdate = $request->list["listdate"];
+            // $existingList->listdate = $request->list["listdate"];
             $existingList->listfor = $request->list["listfor"];
             $existingList->updated_at = $request->list['listdate'] ? Carbon::now() : null;
             $existingList->save();
