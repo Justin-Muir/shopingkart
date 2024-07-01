@@ -21,3 +21,5 @@ Route::prefix('/items')->group(function () {
     Route::post('/store/{id}',[listItemscontroller::class,'store']);
     Route::delete('/{id}',[listItemscontroller::class,'destroy']);
 });
+
+Route::get('/listTotal/{id}', [listItemsController::class, 'getListTotal']);

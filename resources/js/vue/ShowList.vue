@@ -36,11 +36,9 @@
                     console.log(error)
                 })
             }
-
-            onMounted(() => {
-                console.log('total list')
-                getList()
-            })
+            getData.getList()
+            
+            getList()
 
             const deleteList = (list_id) => {
             axios.delete(`api/list/${list_id}`)
@@ -72,8 +70,7 @@
                 getList,
                 getData,
                 deleteList,
-                updateList
-
+                updateList,
             }
         },
     }

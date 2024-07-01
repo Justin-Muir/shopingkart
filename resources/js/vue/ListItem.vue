@@ -5,8 +5,8 @@
                 text-3xl italic font-bold font-serif tracking-wider text-blue-700 h-14 rounded-lg ">
                 {{ list_for }}
             </h1> 
-            <h1 class="ml-8 text-green-600 text-lg font-simibold tracking-wider font-serif border-b-2 h-6 border-green-300 rounded-lg bg-gray-100 shadow-sm shadow-green-300/50">
-                TOTAL ${{getData.total}}{{ getData.items }}
+            <h1 class="ml-8 text-green-600 text-2xl font-simibold tracking-wider font-serif border-b-2 h-6 border-green-300 rounded-lg bg-gray-100 shadow-sm shadow-green-300/50">
+                TOTAL $ {{getData.listTotal}}
             </h1>
         </div>
         <section class="ml-6 mr-6 grid justify-center border-t-4 md:border-none border-blue-300 rounded-lg" >
@@ -50,7 +50,6 @@
 import {useRoute} from 'vue-router'
 import {ref} from 'vue'
 import axios from 'axios'
-import {onMounted,onUnmounted} from 'vue'
 
 // import {created} from 'vue'
 import { getDataStore } from '../store/store'
@@ -63,7 +62,6 @@ export default {
         const route = useRoute()
         const list_for = route.params.id
         const getData = getDataStore()
-        const storedItem = getData.items
         const GCT = 15
         const item = ref({
             item_name: '',
@@ -100,27 +98,12 @@ export default {
                 if(item.value.plus_gct == 1){
                     item.value.itemGCT = (GCT / 100) * item.value.price
                     item.value.itemSubTotal = Number(item.value.itemGCT) + Number(item.value.price)
-                    item.value.itemTotal = (item.value.quantity) * item.value.itemSubTotal
-                    
+                    item.value.itemTotal = (item.value.quantity) * item.value.itemSubTotal                  
                 }
             }
         }
 
-        const findTotal = () =>{ 
-            console.log(storedItem.value)
-            // storedItem.value.forEach(item => {
-            //     this.itemTotals.push(item.itemTotal)
-            // })
-            // console.log(this.itemTotals) 
-            // this.listTotal = this.test.reduce((acc,curr) => acc+curr)   
-            // console.log(this.listTotal)
-        } 
-
-        onMounted(() => {
-            findTotal()
-            console.log('list item')
-        })
-
+        console.log(getData.findTotal)
         return{
             getData,
             list_for,

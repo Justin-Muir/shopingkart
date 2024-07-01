@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\listItems;
+use Illuminate\support\Facades\DB;
 class listItemsController extends Controller
 {
     /**
@@ -38,13 +39,21 @@ class listItemsController extends Controller
         $listItem->itemTotal = $request->item['itemTotal'];
         $listItem->itemGCT = $request->item['itemGCT'];
         $listItem->save();
-
         return $listItem;
+       
+    }
+
+    public function getListTotal($id)
+    {   
+        $list_for = $id;
+        $items = DB::table('list_items')->where('list_for', $list_for)->sum('itemTotal');
+        return $items;
     }
 
     /**
      * Display the specified resource.
      */
+    
     public function show(string $id)
     {
         //
@@ -63,7 +72,20 @@ class listItemsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        $existingItem = listItems::find($id);
+
+        if ($existingItem){
+        $existingItem->price = $request->item['price'];
+        $existingItem->quantity = $request->item['quantity'];
+        $existingItem->item_name = $request->item['item_name'];
+        $existingItem->plus_gct = $request->item['plus_gct'];
+        $existingItem->itemSubTotal = $request->item['itemSubTotal'];
+        $existingItem->itemTotal = $request->item['itemTotal'];
+        $existingItem->itemGCT = $request->item['itemGCT'];
+        $existingItem->save();
+
+        return $existingItem;
+        }
     }
 
     /**
