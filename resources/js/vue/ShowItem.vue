@@ -4,38 +4,6 @@
         <!-- this section is to display all the items in each list -->
         <section class="mt-12">
             <!-- this section is for the list update modal -->
-            <section v-if="showModal='true'" class="bg-gray-300 h-1/2 w-1/2 index-1 hidden">
-                <form @submit.prevent="addItems" action="" class="grid  gap-4">
-                    <div class="flex-col">
-                        <div class="grid mt-4">
-                            <label class=" font-mono tracking-wide font-semibold text-lg  " for="item_name">Item Name</label>
-                            <input class="border-2 border-blue-300 bg-gray-100 rounded-lg w-80 p-2 shadow-lg shadow-green-300/50"  id="Item_name" type="text">
-                        </div>
-                    </div>
-                    <div class="flex-col">
-                        <div class="grid mt-4">
-                            <label class=" font-mono tracking-wide font-semibold text-lg  " for="">price</label>
-                            <input class="border-2 border-blue-300 bg-gray-100 rounded-lg w-80 p-2 shadow-lg shadow-green-300/50"  id="price" type="decimal">
-                        </div>
-                    </div>
-                    <div class="flex-col">
-                        <div class="grid mt-4">
-                            <label class=" font-mono tracking-wide font-semibold text-lg " for="Quantity">Quantity</label>
-                            <input class="border-2 border-blue-300 bg-gray-100 rounded-lg w-80 p-2 shadow-lg shadow-green-300/50"  id="Quantity" type="integer">
-                        </div>
-                    </div>
-                    <div class="flex-col">
-                        <div class="md:grid flex mt-4 mb-4">
-                            <label class=" font-mono tracking-wide font-semibold text-lg  " for="list for">Plus GCT</label>
-                            <input class=" ring-2  shadow-lg shadow-green-300/50 ring-inset ring-offset-2  ring-blue-300 size-8 md:mt-2 ml-6 p-2"  id="plus_gct" type="checkbox">
-                        </div>
-                    </div>
-                    <div class="flex justify-center">
-                        <button class="bg-green-500 text-white p-3 m-3 rounded-lg font-bold hover:text-blue-700 hover:bg-white duration-500 shadow-lg">ADD ITEM</button>
-                    </div>
-                </form>
-            </section>
-
             <div class="flex justify-center">
                <table class="w-4/5 rounded-lg">
                 
@@ -124,17 +92,6 @@ export default{
                 })
             }
 
-            const updateItem = (item_id) => {
-               showModal.push('true')
-                console.log('update')
-                console.log(showModal)
-                axios.put(`api/items/${item_id}`)
-                .then(response => {
-                    if (response == 200){
-
-                    }
-                })
-            }
             return{
                 getItems,
                 getData,
@@ -143,8 +100,6 @@ export default{
                 deleteItem,
                 showModal,
                 getTotal,
-                updateItem
-
         }
     }
 }

@@ -36,7 +36,6 @@
                     console.log(error)
                 })
             }
-            getData.getList()
             
             getList()
 
@@ -54,7 +53,7 @@
 
         }
         const updateList = (list_id) => {
-            axios.put(`api/list/${list_id}`)
+            axios.put(`/api/list/${list_id}`)
 
             .then(response => {
                 if(response.status == 200) {

@@ -9,8 +9,9 @@
                 TOTAL $ {{getData.listTotal}}
             </h1>
         </div>
+        
+
         <section class="ml-6 mr-6 grid justify-center border-t-4 md:border-none border-blue-300 rounded-lg" >
-            
             <form @submit.prevent="addItems" action="" class="md:flex gap-4">
                 <div class="flex-col">
                     <div class="grid mt-4">
@@ -41,8 +42,12 @@
                 </div>
             </form>
         </section>
+
         <!-- components to display list of items -->
         <show-item/>
+        <edit-items/>
+
+
     </div>
 </template>
 
@@ -54,9 +59,10 @@ import axios from 'axios'
 // import {created} from 'vue'
 import { getDataStore } from '../store/store'
 import ShowItem from './ShowItem.vue'
+import editItems from'./editItems.vue'
 
 export default {
-    components: {ShowItem},
+    components: {ShowItem,editItems},
     name:'ListItem',
     setup(){
         const route = useRoute()

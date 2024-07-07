@@ -14,6 +14,10 @@
                 <router-link :to="{name: 'SignIn'}">
                     <button class="bg-green-500 text-white p-3 m-3 rounded-lg font-bold hover:text-blue-700 hover:bg-white duration-1000 shadow-lg">Sign in</button>
                 </router-link>
+
+                <router-link :to="{name: 'Register'}">
+                    <button class="bg-green-500 text-white p-3 m-3 rounded-lg font-bold hover:text-blue-700 hover:bg-white duration-1000 shadow-lg">Register</button>
+                </router-link>
                 
                 <button class="bg-green-500 text-white p-3 m-3 rounded-lg font-bold hover:text-blue-700 hover:bg-white duration-1000 shadow-lg">Log out</button>
             </div>

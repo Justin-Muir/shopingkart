@@ -6,8 +6,5 @@ export const getDataStore = defineStore({
         lists: {},
         items:[],
         listTotal: 0,
-        itemTotals:[],
-        test:[1,2,3,4]
-
     }),
 })
