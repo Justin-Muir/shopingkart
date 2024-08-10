@@ -64,7 +64,8 @@ class listItemsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = listItems::find($id);
+        return $item;
     }
 
     /**
@@ -74,18 +75,15 @@ class listItemsController extends Controller
     {
         $existingItem = listItems::find($id);
 
-        if ($existingItem){
         $existingItem->price = $request->item['price'];
         $existingItem->quantity = $request->item['quantity'];
-        $existingItem->item_name = $request->item['item_name'];
+        $existingItem->item_name = $request->item['Item_name'];
         $existingItem->plus_gct = $request->item['plus_gct'];
-        $existingItem->itemSubTotal = $request->item['itemSubTotal'];
-        $existingItem->itemTotal = $request->item['itemTotal'];
-        $existingItem->itemGCT = $request->item['itemGCT'];
+        // $existingItem->itemSubTotal = $request->item['itemSubTotal'];
+        // $existingItem->itemTotal = $request->item['itemTotal'];
+        // $existingItem->itemGCT = $request->item['itemGCT'];
         $existingItem->save();
-
         return $existingItem;
-        }
     }
 
     /**
@@ -93,7 +91,7 @@ class listItemsController extends Controller
      */
     public function destroy(string $id)
     {
-        $existingItem = listItems::find($id);
+        $existingItem = listItems ::find($id);
 
         if ($existingItem) {
             $existingItem->delete();

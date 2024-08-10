@@ -45,9 +45,6 @@
 
         <!-- components to display list of items -->
         <show-item/>
-        <edit-items/>
-
-
     </div>
 </template>
 
@@ -55,14 +52,11 @@
 import {useRoute} from 'vue-router'
 import {ref} from 'vue'
 import axios from 'axios'
-
-// import {created} from 'vue'
 import { getDataStore } from '../store/store'
 import ShowItem from './ShowItem.vue'
-import editItems from'./editItems.vue'
 
 export default {
-    components: {ShowItem,editItems},
+    components: {ShowItem},
     name:'ListItem',
     setup(){
         const route = useRoute()
@@ -80,10 +74,20 @@ export default {
             list_for: list_for
         })
 
-        const addItems = () => {
+        const addItems = async () => {
 
             if (item.item_name == "") {
                 return
+            }
+            
+            if (item.value.quantity !== ''){
+                item.value.itemTotal = item.value.quantity * item.value.price
+
+                if(item.value.plus_gct == 1){
+                    item.value.itemGCT = (GCT / 100) * item.value.price
+                    item.value.itemSubTotal = Number(item.value.itemGCT) + Number(item.value.price)
+                    item.value.itemTotal = (item.value.quantity) * item.value.itemSubTotal                  
+                }
             }
 
             axios.post(`/api/items/store/${list_for}`, {
@@ -98,15 +102,7 @@ export default {
             .catch(error => {
                 console.log(error)
             })
-            if (item.value.quantity !== ''){
-                item.value.itemTotal = item.value.quantity * item.value.price
-
-                if(item.value.plus_gct == 1){
-                    item.value.itemGCT = (GCT / 100) * item.value.price
-                    item.value.itemSubTotal = Number(item.value.itemGCT) + Number(item.value.price)
-                    item.value.itemTotal = (item.value.quantity) * item.value.itemSubTotal                  
-                }
-            }
+            
         }
 
         console.log(getData.findTotal)

@@ -5,6 +5,7 @@ export const getDataStore = defineStore({
     state: () => ({
         lists: {},
         items:[],
+        editItems:{},
         listTotal: 0,
     }),
 })

@@ -19,8 +19,9 @@ Route::prefix('/list')->group(function () {
 Route::get('/listitems', [listItemsController::class,'index']);
 Route::prefix('/items')->group(function () {
     Route::post('/store/{id}',[listItemscontroller::class,'store']);
+    Route::put('/update/{id}',[listItemscontroller::class,'update']);
     Route::delete('/{id}',[listItemscontroller::class,'destroy']);
-    Route::put('/{id}', [listItemsController::class,'update']);
 });
 
-Route::get('/listTotal/{id}', [listItemsController::class, 'getListTotal']);
+Route::get('/listTotal/{id}',[listItemsController::class,'getListTotal']);
+Route::get('/editItems/{id}',[listItemsController::class,'edit']);
